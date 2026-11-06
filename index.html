@@ -3,64 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculadora Sueldo Neto España</title>
+  
+  <!-- تگ‌های اصلی سئو -->
+  <title>Calculadora de Sueldo Neto España (IRPF y Seguridad Social)</title>
+  <meta name="description" content="Calculadora de sueldo neto en España. Calcula tu nómina mensual y anual a partir del salario bruto según las retenciones de IRPF y Seguridad Social.">
+  <meta name="keywords" content="calculadora sueldo neto, salario neto españa, calcular nomina, irpf, retenciones seguridad social, autonomo sueldo">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://calculadorasueldo.vercel.app/">
+
+  <!-- متاتگ‌های Open Graph برای اشتراک‌گذاری شیک در شبکه‌ها -->
+  <meta property="og:title" content="Calculadora de Sueldo Neto en España">
+  <meta property="og:description" content="Calcula cuánto vas a cobrar al mes tras aplicar IRPF y cotizaciones a la Seguridad Social.">
+  <meta property="og:url" content="https://calculadorasueldo.vercel.app/">
+  <meta property="og:type" content="website">
+
+  <!-- اسکریپت Schema.org برای درک بهتر گوگل از ابزار -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Calculadora de Sueldo Neto España",
+    "url": "https://calculadorasueldo.vercel.app/",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "All",
+    "description": "Calculadora rápida de salario neto mensual y anual en España."
+  }
+  </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen py-10 px-4">
   <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
-    <div class="mb-6 border-b border-slate-100 pb-4">
+    
+    <!-- هدر صفحه -->
+    <header class="mb-6 border-b border-slate-100 pb-4">
       <h1 class="text-2xl font-bold text-slate-900">Calculadora de Sueldo Neto</h1>
       <p class="text-sm text-slate-500 mt-1">Calcula tu salario neto mensual en España según tramos de IRPF y Seguridad Social.</p>
-    </div>
+    </header>
 
     <!-- فرم ورودی‌ها -->
-    <div class="space-y-4">
+    <main class="space-y-4">
       <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Salario Bruto Anual (€)</label>
+        <label for="grossSalary" class="block text-sm font-medium text-slate-700 mb-1">Salario Bruto Anual (€)</label>
         <input type="number" id="grossSalary" value="24000" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
       </div>
 
       <div class="grid grid-cols-2 gap-4">
         <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1">Pagas al año</label>
+          <label for="pagas" class="block text-sm font-medium text-slate-700 mb-1">Pagas al año</label>
           <select id="pagas" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
             <option value="12">12 pagas</option>
             <option value="14">14 pagas</option>
           </select>
         </div>
         <div>
-          <label class="block text-sm font-medium text-slate-700 mb-1">Régimen</label>
+          <label for="regimen" class="block text-sm font-medium text-slate-700 mb-1">Régimen laboral</label>
           <select id="regimen" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
             <option value="empleado">Empleado (General)</option>
-            <option value="autonomo">Autónomo (Tarifa plana / estándar)</option>
+            <option value="autonomo">Autónomo (Cuota fija / estándar)</option>
           </select>
         </div>
       </div>
 
-      <button onclick="calculateSalary()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors mt-2">
-        Calcular Neto
+      <button type="button" onclick="calculateSalary()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors mt-2">
+        Calcular Sueldo Neto
       </button>
-    </div>
 
-    <!-- بخش نتایج -->
-    <div id="results" class="mt-8 pt-6 border-t border-slate-100">
-      <div class="bg-blue-50/70 border border-blue-100 rounded-xl p-5 text-center mb-6">
-        <span class="text-xs font-semibold uppercase tracking-wider text-blue-600">Sueldo Neto Estimado</span>
-        <div class="text-4xl font-extrabold text-blue-900 mt-1" id="netMonthlyDisplay">1.620 € / mes</div>
-        <span class="text-xs text-blue-600/80 mt-1 block" id="annualNetSubtitle">Neto anual: 19.440 €</span>
+      <!-- بخش نتایج -->
+      <div id="results" class="mt-8 pt-6 border-t border-slate-100">
+        <div class="bg-blue-50/70 border border-blue-100 rounded-xl p-5 text-center mb-6">
+          <span class="text-xs font-semibold uppercase tracking-wider text-blue-600">Sueldo Neto Estimado</span>
+          <div class="text-4xl font-extrabold text-blue-900 mt-1" id="netMonthlyDisplay">1.620 € / mes</div>
+          <span class="text-xs text-blue-600/80 mt-1 block" id="annualNetSubtitle">Neto anual: 19.440 €</span>
+        </div>
+
+        <div class="space-y-2 text-sm">
+          <div class="flex justify-between py-1.5 border-b border-slate-100">
+            <span class="text-slate-600">Retención IRPF media:</span>
+            <span class="font-medium text-slate-900" id="irpfDisplay">12.5%</span>
+          </div>
+          <div class="flex justify-between py-1.5 border-b border-slate-100">
+            <span class="text-slate-600">Seguridad Social / Cuota mensual:</span>
+            <span class="font-medium text-slate-900" id="ssDisplay">127 € / mes</span>
+          </div>
+        </div>
       </div>
 
-      <div class="space-y-2 text-sm">
-        <div class="flex justify-between py-1.5 border-b border-slate-100">
-          <span class="text-slate-600">Retención IRPF media:</span>
-          <span class="font-medium text-slate-900" id="irpfDisplay">12.5%</span>
+      <!-- کادر افیلیت / پیشنهاد بانکی بدون کارمزد برای حقوق -->
+      <aside class="mt-6 p-4 rounded-xl border border-dashed border-slate-300 bg-slate-50 text-center">
+        <p class="text-xs text-slate-500 uppercase font-semibold">Consejo financiero</p>
+        <p class="text-sm font-medium text-slate-800 mt-1">¿Cobras tu nómina en una cuenta con comisiones?</p>
+        <p class="text-xs text-slate-600 mt-0.5">Compara cuentas nómina online 100% gratuitas con transferencias inmediatas sin coste.</p>
+      </aside>
+
+      <!-- بخش متنی و سئو برای رتبه‌گیری در گوگل (FAQ) -->
+      <section class="mt-10 pt-8 border-t border-slate-200 text-slate-700">
+        <h2 class="text-xl font-bold text-slate-900 mb-4">¿Cómo se calcula el salario neto en España?</h2>
+        <p class="text-sm leading-relaxed mb-4">
+          Para saber cuánto dinero recibirás en tu cuenta bancaria a partir de tu salario bruto anual, se deben restar dos conceptos principales: las retenciones a cuenta del <strong>IRPF</strong> y las cotizaciones obligatorias a la <strong>Seguridad Social</strong>.
+        </p>
+
+        <div class="space-y-4 text-sm mt-6">
+          <article class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+            <h3 class="font-semibold text-slate-900 mb-1">¿Qué retención de Seguridad Social se aplica en nómina?</h3>
+            <p class="text-slate-600 leading-relaxed">
+              En los trabajadores por cuenta ajena, la aportación habitual del empleado es aproximadamente del <strong>6,35% - 6,45%</strong> del sueldo bruto (que cubre contingencias comunes, desempleo y formación profesional).
+            </p>
+          </article>
+
+          <article class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+            <h3 class="font-semibold text-slate-900 mb-1">¿Cuál es la diferencia entre 12 y 14 pagas?</h3>
+            <p class="text-slate-600 leading-relaxed">
+              El importe anual total ganado es el mismo. En una nómina de 14 pagas recibes una paga extraordinaria en verano y otra en diciembre, lo que hace que cada una de las 12 mensualidades ordinarias sea ligeramente menor.
+            </p>
+          </article>
+
+          <article class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+            <h3 class="font-semibold text-slate-900 mb-1">¿Cómo tributan los trabajadores autónomos?</h3>
+            <p class="text-slate-600 leading-relaxed">
+              Los autónomos no tienen nómina con retención estándar del empleador; cotizan en la Seguridad Social mediante un sistema de tramos según sus ingresos reales y liquidan trimestralmente su IRPF (Modelo 130).
+            </p>
+          </article>
         </div>
-        <div class="flex justify-between py-1.5 border-b border-slate-100">
-          <span class="text-slate-600">Seguridad Social / Cuota mensual:</span>
-          <span class="font-medium text-slate-900" id="ssDisplay">127 € / mes</span>
-        </div>
-      </div>
-    </div>
+      </section>
+    </main>
+
+    <footer class="mt-10 pt-4 border-t border-slate-100 text-center text-xs text-slate-400">
+      Calculadora orientativa de sueldos en España. Los cálculos exactos pueden variar según situación familiar y comunidad autónoma.
+    </footer>
   </div>
 
   <script>
@@ -72,7 +142,6 @@
       let ssYearly = 0;
       let irpfRate = 0;
 
-      // محاسبه تقریبی IRPF بر اساس براکت‌های استاندارد
       if (gross <= 12450) irpfRate = 0.09;
       else if (gross <= 20200) irpfRate = 0.12;
       else if (gross <= 35200) irpfRate = 0.15;
@@ -80,9 +149,9 @@
       else irpfRate = 0.28;
 
       if (regimen === 'empleado') {
-        ssYearly = gross * 0.0635; // سهم کارمند برای تأمین اجتماعی
+        ssYearly = gross * 0.0635;
       } else {
-        ssYearly = 300 * 12; // میانگین سهم ماهانه آتونومو
+        ssYearly = 300 * 12;
       }
 
       const totalDeductions = (gross * irpfRate) + ssYearly;
